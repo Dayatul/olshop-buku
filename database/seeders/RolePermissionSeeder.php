@@ -3,27 +3,42 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
 class RolePermissionSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        //
-        $ownerRole = Role::create(['name' => 'owner']);
-        $buyerRole = Role::create(['name' => 'buyer']);
-        $adminRole = Role::create(['name' => 'admin']);
+        // Buat roles (hindari duplicate)
+        $ownerRole   = Role::firstOrCreate(['name' => 'owner']);
+        $buyerRole   = Role::firstOrCreate(['name' => 'buyer']);
+        $adminRole   = Role::firstOrCreate(['name' => 'admin']);
+        $penulisRole = Role::firstOrCreate(['name' => 'penulis']);
 
-        $user = User::create([
-            'name' => 'Doni Owner',
-            'email' => 'doni@gmail.com',
-            'password' => bcrypt('12345678'),
-        ]);
-        $user->assignRole($ownerRole);
+        // Buat user default dan assign role
+        $owner = User::updateOrCreate(
+            ['email' => 'owner@mail.com'],
+            ['name' => 'Owner', 'password' => bcrypt('12345678')]
+        );
+        $owner->syncRoles([$ownerRole]); // pastikan hanya role ini
+
+        $admin = User::updateOrCreate(
+            ['email' => 'admin@mail.com'],
+            ['name' => 'Admin', 'password' => bcrypt('12345678')]
+        );
+        $admin->syncRoles([$adminRole]); // pastikan role admin
+
+        $buyer = User::updateOrCreate(
+            ['email' => 'buyer@mail.com'],
+            ['name' => 'Buyer', 'password' => bcrypt('12345678')]
+        );
+        $buyer->syncRoles([$buyerRole]);
+
+        $penulis = User::updateOrCreate(
+            ['email' => 'penulis@mail.com'],
+            ['name' => 'Penulis', 'password' => bcrypt('12345678')]
+        );
+        $penulis->syncRoles([$penulisRole]);
     }
 }

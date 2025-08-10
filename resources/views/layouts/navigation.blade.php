@@ -27,6 +27,18 @@
                             {{ __('Manage Categories') }}
                         </x-nav-link>
                     </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
+                            {{ __('Manage Articles') }}
+                        </x-nav-link>
+                    </div>
+                @endrole
+                @role('penulis')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
+                            {{ __('Manage Articles') }}
+                        </x-nav-link>
+                    </div>
                 @endrole
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('product_transactions.index')" :active="request()->routeIs('product_transactions.index')">
