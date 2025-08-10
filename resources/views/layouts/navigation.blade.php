@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                @role('owner')
+                @role('owner|admin')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
                             {{ __('Manage Products') }}
@@ -27,24 +27,21 @@
                             {{ __('Manage Categories') }}
                         </x-nav-link>
                     </div>
+                @endrole
+                @role('penulis|admin')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
-                            {{ __('Manage Articles') }}
+                        <x-nav-link :href="route('admin.articles.index')" :active="request()->routeIs('admin.articles.index')">
+                            {{ __('Manage Article') }}
                         </x-nav-link>
                     </div>
                 @endrole
-                @role('penulis')
+                @role('owner|admin|buyer')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
-                            {{ __('Manage Articles') }}
+                        <x-nav-link :href="route('product_transactions.index')" :active="request()->routeIs('product_transactions.index')">
+                            {{ Auth::user()->hasRole('owner') ? __('Apotek Orders') : __('My Orders') }}
                         </x-nav-link>
                     </div>
                 @endrole
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('product_transactions.index')" :active="request()->routeIs('product_transactions.index')">
-                        {{ Auth::user()->hasRole('owner') ? __('Apotek Orders') : __('My Orders') }}
-                    </x-nav-link>
-                </div>
             </div>
 
             <!-- Settings Dropdown -->

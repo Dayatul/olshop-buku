@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page | Parma</title>
+    <title>Landing Page | Olshop</title>
     <link rel="shortcut icon" href="{{ asset('/assets/svgs/logo-mark.svg') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
@@ -12,8 +12,41 @@
 </head>
 
 <body>
+    {{-- navbar --}}
+    {{-- <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-gray-900">Logoipsum</span>
+                </div>
+
+                <!-- Menu Items -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Home</a>
+                    <a href="#"
+                        class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Product</a>
+                    <a href="#" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">About
+                        Us</a>
+                    <a href="#" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">FAQ</a>
+                    <a href="#"
+                        class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Contact</a>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center">
+                    <div class="flex items-center space-x-2">
+                        <div
+                            class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
+                            A</div>
+                        <span class="text-sm font-medium text-gray-900">Angga</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav> --}}
     <!-- Topbar -->
-    <section class="flex items-center justify-between gap-5 wrapper">
+    <section class="flex items-center justify-between gap-5 p-5">
         <div class="flex items-center gap-3">
             <div class="bg-white rounded-full p-[5px] flex justify-center items-center">
                 <img src="{{ asset('/assets/svgs/avatar.svg') }}" class="size-[50px] rounded-full" alt="">
@@ -87,12 +120,10 @@
     </nav>
 
     <!-- Header -->
-    <section class="wrapper flex flex-col gap-2.5 items-center justify-center">
+    <section class="flex flex-col gap-2.5 items-center justify-center" style="padding: 100px 0 100px 0">
         <p class="text-4xl font-extrabold text-center">
-            We Provide <br>
-            Best Medicines
-        </p>
-        <form action="{{ route('front.search') }}" method="GET" id="searchForm" class="w-full">
+            We Provide Best Medicines </p>
+        <form action="{{ route('front.search') }}" method="GET" id="searchForm" class="w-80">
             <input type="text" name="search" id="searchProduct"
                 style="background-image: url('{{ asset('/assets/svgs/ic-search.svg') }}')"
                 class="block w-full py-3.5 pl-4 pr-10 rounded-[50px] font-semibold placeholder:text-grey placeholder:font-normal text-black text-base bg-no-repeat bg-[calc(100%-16px)]  focus:ring-2 focus:ring-primary focus:outline-none focus:border-none transition-all"
@@ -101,9 +132,9 @@
     </section>
 
     <!-- Your last order -->
-    <section class="wrapper">
+    <section class="max-w-3x1 mx-auto justify-center items-center p-5 ">
         <div style="background-image:url('{{ asset('/assets/svgs/pipeline.svg') }}')"
-            class="flex justify-between gap-5 items-center bg-lilac py-3.5 px-4 rounded-2xl relative bg-left bg-no-repeat bg-cover">
+            class="max-w-3x1 mx-auto flex justify-between gap-5 items-center bg-lilac py-3.5 px-4 rounded-2xl relative bg-left bg-no-repeat bg-cover ">
             <p class="text-base font-bold">
                 Your last order has <br>
                 been proceed
@@ -113,7 +144,7 @@
     </section>
 
     <!-- Categories -->
-    <section class="wrapper !px-0 flex flex-col gap-2.5">
+    <section class="!px-0 flex flex-col gap-2.5">
         <p class="px-4 text-base font-bold">
             Categories
         </p>
@@ -132,7 +163,7 @@
     </section>
 
     <!-- Latest Products -->
-    <section class="wrapper !px-0 flex flex-col gap-2.5">
+    <section class=" !px-0 flex flex-col gap-2.5">
         <p class="px-4 text-base font-bold">
             Latest Products
         </p>
@@ -162,7 +193,7 @@
     </section>
 
     <!-- Explore -->
-    <section class="wrapper">
+    <section class="">
         <div style="background-image: url('{{ asset('/assets/svgs/doctor-help.svg') }}');"
             class="bg-lilac py-3.5 px-5 rounded-2xl relative bg-right-bottom bg-no-repeat bg-auto">
             <img src="{{ asset('/assets/svgs/cloud.svg') }}" class="-ml-1.5 mb-1.5" alt="">
@@ -180,7 +211,7 @@
     </section>
 
     <!-- Most Purchased -->
-    <section class="wrapper flex flex-col gap-2.5 pb-40">
+    <section class=" flex flex-col gap-2.5 pb-40">
         <p class="text-base font-bold">
             Most Purchased
         </p>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
@@ -27,9 +28,12 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('product_transactions', ProductTransactionController::class)->middleware('role:owner|buyer');
 
+    // Route::resource('articles', ArticleController::class)->middleware('role:owner|admin|penulis');
+
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::resource('products', ProductController::class)->middleware('role:owner');
-        Route::resource('categories', CategoryController::class)->middleware('role:owner');
+        Route::resource('products', ProductController::class)->middleware('role:owner|admin');
+        Route::resource('categories', CategoryController::class)->middleware('role:owner|admin');
+        Route::resource('articles', ArticleController::class)->middleware('role:owner|admin|penulis');
     });
 });
 

@@ -16,6 +16,7 @@
                 @forelse($categories as $category)
                     <div class="item-card flex flex-row justify-between items-center">
                         <img src="{{ Storage::url($category->icon) }}" alt="" class="w-[50px] h-[50px]">
+
                         <h3 class="text-xl font-bold text-indigo-900">{{ $category->name }}</h3>
                         <div class="flex flex-row items-center gap-x-3">
                             <a href="{{ route('admin.categories.edit', $category) }}"
