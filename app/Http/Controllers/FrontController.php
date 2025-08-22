@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -15,10 +16,12 @@ class FrontController extends Controller
         $user = Auth::user();
         $products = Product::with('category')->orderBy('id', 'DESC')->take(6)->get();
         $categories = Category::all();
+        $articles = Article::with(['user', 'category'])->latest()->take(3)->get();
         return view('front.index', [
             'products' => $products,
             'categories' => $categories,
             'user' => $user,
+            'articles' => $articles,
         ]);
     }
 

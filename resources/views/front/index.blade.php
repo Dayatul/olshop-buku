@@ -4,296 +4,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page | Olshop</title>
-    <link rel="shortcut icon" href="{{ asset('/assets/svgs/logo-mark.svg') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">
-    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-    <link rel="stylesheet" href="https://cdn.tailwindcss.com">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Olshop Buku</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body>
-    {{-- navbar --}}
-    {{-- <nav class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <span class="text-xl font-bold text-gray-900">Logoipsum</span>
-                </div>
-
-                <!-- Menu Items -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Home</a>
-                    <a href="#"
-                        class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Product</a>
-                    <a href="#" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">About
-                        Us</a>
-                    <a href="#" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">FAQ</a>
-                    <a href="#"
-                        class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Contact</a>
-                </div>
-
-                <!-- User Profile -->
-                <div class="flex items-center">
-                    <div class="flex items-center space-x-2">
-                        <div
-                            class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
-                            A</div>
-                        <span class="text-sm font-medium text-gray-900">Angga</span>
-                    </div>
-                </div>
+    {{-- navigation --}}
+    <nav>
+        <div class="container mx-auto flex items-center justify-between p-4">
+            <a href="#" class="w-[150px]"><img src="{{ asset('/assets/images/logo-sample.webp') }}"
+                    alt=""></a>
+            <div class="flex space-x-6 font-semibold">
+                <a href="#" class="hover:text-red-600">Home</a>
+                <a href="#" class="hover:text-red-600">Product</a>
+                <a href="#" class="hover:text-red-600">Blog</a>
+                <a href="#" class="hover:text-red-600">About Us</a>
+                <a href="#" class="hover:text-red-600">Contact</a>
             </div>
-        </div>
-    </nav> --}}
-    <!-- Topbar -->
-    <section class="flex items-center justify-between gap-5 p-5">
-        <div class="flex items-center gap-3">
-            <div class="bg-white rounded-full p-[5px] flex justify-center items-center">
-                <img src="{{ asset('/assets/svgs/avatar.svg') }}" class="size-[50px] rounded-full" alt="">
-            </div>
-            <div class="">
-                <p class="text-base font-semibold capitalize text-primary">
-                    @auth
-                        {{ Auth::user()->name }}
-                    @endauth
-                    @guest
-                        Customer
-                    @endguest
-                </p>
-                <p class="text-sm">
-                    Customer
-                </p>
-            </div>
-        </div>
-        <div class="flex items-center gap-[10px]">
-            <div type="button" class="p-2 bg-white rounded-full">
-                <span class="relative">
-                    <!-- notification -->
-                    <img src="{{ asset('/assets/svgs/ic-notification.svg') }}" class="size-5" alt="">
-                    <!-- notification dot -->
-                    <span class="block rounded-full size-1.5 bg-primary absolute top-0 right-0 -translate-x-1/2"></span>
-                </span>
-            </div>
-            <a href="{{ route('carts.index') }}" type="button" class="p-2 bg-white rounded-full">
-                <img src="{{ asset('/assets/svgs/ic-shopping-bag.svg') }}" class="size-5" alt="">
-            </a>
-        </div>
-    </section>
-
-    <!-- Floating navigation -->
-    <nav class="fixed z-50 bottom-[30px] bg-black rounded-[50px] pt-[18px] px-10 left-1/2 -translate-x-1/2 w-80">
-        <div class="flex items-center justify-center gap-5 flex-nowrap">
-            <a href="#" class="flex flex-col items-center justify-center gap-1 px-1 group is-active">
-                <img src="{{ asset('/assets/svgs/ic-grid.svg') }}"
-                    class="filter-to-grey group-[.is-active]:filter-to-primary" alt="">
-                <p
-                    class="border-b-4 border-transparent group-[.is-active]:border-primary pb-3 text-xs text-center font-semibold text-grey group-[.is-active]:text-primary">
-                    Home
-                </p>
-            </a>
-            <a href="#" class="flex flex-col items-center justify-center gap-1 px-1 group">
-                <img src="{{ asset('/assets/svgs/ic-location.svg') }}"
-                    class="filter-to-grey group-[.is-active]:filter-to-primary" alt="">
-                <p
-                    class="border-b-4 border-transparent group-[.is-active]:border-primary pb-3 text-xs text-center font-semibold text-grey group-[.is-active]:text-primary">
-                    Stores
-                </p>
-            </a>
-            <a href="{{ route('product_transactions.index') }}"
-                class="flex flex-col items-center justify-center gap-1 px-1 group">
-                <img src="{{ asset('/assets/svgs/ic-note.svg') }}"
-                    class="filter-to-grey group-[.is-active]:filter-to-primary" alt="">
-                <p
-                    class="border-b-4 border-transparent group-[.is-active]:border-primary pb-3 text-xs text-center font-semibold text-grey group-[.is-active]:text-primary">
-                    Orders
-                </p>
-            </a>
-            <a href="{{ route('dashboard') }}" class="flex flex-col items-center justify-center gap-1 px-1 group">
-                <img src="{{ asset('/assets/svgs/ic-profile.svg') }}"
-                    class="filter-to-grey group-[.is-active]:filter-to-primary" alt="">
-                <p
-                    class="border-b-4 border-transparent group-[.is-active]:border-primary pb-3 text-xs text-center font-semibold text-grey group-[.is-active]:text-primary">
-                    Profile
-                </p>
-            </a>
+            <a href="{{ route('login') }}"
+                class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded">Login</a>
         </div>
     </nav>
 
-    <!-- Header -->
-    <section class="flex flex-col gap-2.5 items-center justify-center" style="padding: 100px 0 100px 0">
-        <p class="text-4xl font-extrabold text-center">
-            We Provide Best Medicines </p>
-        <form action="{{ route('front.search') }}" method="GET" id="searchForm" class="w-80">
-            <input type="text" name="search" id="searchProduct"
-                style="background-image: url('{{ asset('/assets/svgs/ic-search.svg') }}')"
-                class="block w-full py-3.5 pl-4 pr-10 rounded-[50px] font-semibold placeholder:text-grey placeholder:font-normal text-black text-base bg-no-repeat bg-[calc(100%-16px)]  focus:ring-2 focus:ring-primary focus:outline-none focus:border-none transition-all"
-                placeholder="Search by product name">
-        </form>
-    </section>
-
-    <!-- Your last order -->
-    <section class="max-w-3x1 mx-auto justify-center items-center p-5 ">
-        <div style="background-image:url('{{ asset('/assets/svgs/pipeline.svg') }}')"
-            class="max-w-3x1 mx-auto flex justify-between gap-5 items-center bg-lilac py-3.5 px-4 rounded-2xl relative bg-left bg-no-repeat bg-cover ">
-            <p class="text-base font-bold">
-                Your last order has <br>
-                been proceed
-            </p>
-            <img src="{{ asset('/assets/svgs/nekodicine.svg') }}" class="w-[90px] h-[70px]" alt="">
+    {{-- herosection --}}
+    <section class=" py-20 px-10 space-x-6 container mx-auto flex items-center justify-between">
+        <div class="container mx-auto w-3/6">
+            <h4 class="text-4xl font-bold mb-4 text-gray-600">Ribuan judul buku dari berbagai genre</h4>
+            <p class="text-lg mb-8 text-gray-600">fiksi, nonfiksi, bisnis, pendidikan, hingga buku anak. Lengkap.
+                Terjangkau. Cepat
+                sampai</p>
+            <a href="#" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded">Shop
+                Now</a>
+        </div>
+        <div class="container mx-auto w-3/6">
+            <img src="{{ asset('/assets/images/herosection.webp') }}" alt="">
         </div>
     </section>
 
-    <!-- Categories -->
-    <section class="!px-0 flex flex-col gap-2.5">
-        <p class="px-4 text-base font-bold">
-            Categories
-        </p>
-        <div id="categoriesSlider" class="relative">
-            @forelse ($categories as $category)
-                <div class="inline-flex gap-2.5 items-center py-3 px-3.5 relative bg-white rounded-xl mr-4">
-                    <img src="{{ Storage::url($category->icon) }}" class="size-10" alt="">
-                    <a href="{{ route('front.product.category', $category->id) }}"
-                        class="text-base font-semibold truncate stretched-link">
-                        {{ $category->name }}
-                    </a>
-                </div>
-            @empty
-            @endforelse
+    {{-- Categories Section --}}
+    <section class="py-10 bg-gray-100 px-10 space-x-6">
+        <div class="container mx-auto">
+            {{-- <h2 class="text-3xl font-bold text-center mb-10">Categories</h2> --}}
+            <div id="categoriesSlider" class="relative overflow-x-auto whitespace-nowrap flex justify-center">
+                @forelse ($categories as $category)
+                    <div class="inline-flex gap-2.5 items-center py-3 px-3.5 relative bg-white rounded-xl mr-4">
+                        <img src="{{ Storage::url($category->icon) }}" class="size-10" alt="">
+                        <a href="{{ route('front.product.category', $category->id) }}"
+                            class="text-base font-semibold truncate stretched-link">
+                            {{ $category->name }}
+                        </a>
+                    </div>
+                @empty
+                @endforelse
+            </div>
         </div>
     </section>
-
-    <!-- Latest Products -->
-    <section class=" !px-0 flex flex-col gap-2.5">
-        <p class="px-4 text-base font-bold">
-            Latest Products
-        </p>
-        <div id="proudctsSlider" class="relative">
-            <!-- Product-->
+    {{-- end categories section --}}
+    {{-- product section --}}
+    <section class="py-20 bg-gray-50 px-10">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-10">Featured Products</h2>
             @forelse ($products as $product)
-                <div
-                    class="rounded-2xl bg-white py-3.5 pl-4 pr-[22px] inline-flex flex-col gap-4 items-start mr-4 relative w-[158px]">
-                    <img src="{{ Storage::url($product->photo) }}" class="h-[100px] w-full object-contain"
-                        alt="">
-                    <div>
-                        <a href="{{ route('front.product.details', $product->slug) }}"
-                            class="text-base font-semibold w-[120px] truncate stretched-link block">
-                            {{ $product->name }}
-                        </a>
-                        <p class="text-sm truncate text-grey">
-                            Rp {{ number_format($product->price) }}
-                        </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                            class="w-full h-48 object-cover mb-4 rounded">
+                        <h3 class="text-xl font-semibold mb-2">{{ $product->name }}</h3>
+                        <p class="text-gray-600 mb-4">{{ $product->description }}</p>
+                        <span class="text-red-600 font-bold">${{ $product->price }}</span>
                     </div>
                 </div>
             @empty
-                <p>Ups, Produk belum ada!</p>
+                <p class="text-lg mb-8 text-gray-600 text-center">Ups, Belum ada produk yang tersedia!</p>
             @endforelse
-
-
         </div>
     </section>
+    {{-- end product section --}}
 
-    <!-- Explore -->
-    <section class="">
-        <div style="background-image: url('{{ asset('/assets/svgs/doctor-help.svg') }}');"
-            class="bg-lilac py-3.5 px-5 rounded-2xl relative bg-right-bottom bg-no-repeat bg-auto">
-            <img src="{{ asset('/assets/svgs/cloud.svg') }}" class="-ml-1.5 mb-1.5" alt="">
-            <div class="flex flex-col gap-4 mb-[23px]">
-                <p class="text-base font-bold">
-                    Explore great doctors <br>
-                    for your better life
-                </p>
-                <a href="#"
-                    class="rounded-full bg-white text-primary flex w-max gap-2.5 px-6 py-2 justify-center items-center text-base font-bold">
-                    Explore
-                </a>
+    {{-- Cta section --}}
+    <section class="py-20 bg-gray-200 px-10">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-10">Ready to start your reading journey?</h2>
+            <p class="text-lg text-center mb-6">Discover our wide range of books and find your next favorite read.</p>
+            <div class="flex justify-center">
+                <a href="#" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded">Shop
+                    Now</a>
             </div>
         </div>
     </section>
 
-    <!-- Most Purchased -->
-    <section class=" flex flex-col gap-2.5 pb-40">
-        <p class="text-base font-bold">
-            Most Purchased
-        </p>
-        <div class="flex flex-col gap-4">
-            <!-- Softovac Rami -->
-            <div class="py-3.5 pl-4 pr-[22px] bg-white rounded-2xl flex gap-1 items-center relative">
-                <img src="{{ asset('/assets/images/product-2.webp') }}"
-                    class="w-full max-w-[70px] max-h-[70px] object-contain" alt="">
-                <div class="flex flex-wrap items-center justify-between w-full gap-1">
-                    <div class="flex flex-col gap-1">
-                        <a href="details.html"
-                            class="text-base font-semibold stretched-link whitespace-nowrap w-[150px] truncate">
-                            Softovac Rami
-                        </a>
-                        <p class="text-sm text-grey">
-                            Rp 290.000
-                        </p>
+    {{-- blog section --}}
+    <section class="py-20 px-10">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-10">Latest Article Posts</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                @foreach ($articles as $article)
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}"
+                            class="w-full h-48 object-cover mb-4 rounded">
+                        <h3 class="text-xl font-semibold mb-2">{{ $article->title }}</h3>
+                        <p class="text-gray-600 mb-4">{{ Str::limit($article->content, 100) }}</p>
+                        <a href="#"" class="text-red-600 hover:underline">Read
+                            More</a>
                     </div>
-                    <div class="flex">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                    </div>
-                </div>
-            </div>
-            <!-- Enoki Pro -->
-            <div class="py-3.5 pl-4 pr-[22px] bg-white rounded-2xl flex gap-1 items-center relative">
-                <img src="{{ asset('/assets/images/product-1.webp') }}"
-                    class="w-full max-w-[70px] max-h-[70px] object-contain" alt="">
-                <div class="flex flex-wrap items-center justify-between w-full gap-1">
-                    <div class="flex flex-col gap-1">
-                        <a href="details.html"
-                            class="text-base font-semibold stretched-link whitespace-nowrap w-[150px] truncate">
-                            Enoki Softovac
-                        </a>
-                        <p class="text-sm text-grey">
-                            Rp 34.500.000
-                        </p>
-                    </div>
-                    <div class="flex">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                    </div>
-                </div>
-            </div>
-            <!-- Veetax Bora -->
-            <div class="py-3.5 pl-4 pr-[22px] bg-white rounded-2xl flex gap-1 items-center relative">
-                <img src="{{ asset('/assets/images/product-4.webp') }}"
-                    class="w-full max-w-[70px] max-h-[70px] object-contain" alt="">
-                <div class="flex flex-wrap items-center justify-between w-full gap-1">
-                    <div class="flex flex-col gap-1">
-                        <a href="details.html"
-                            class="text-base font-semibold stretched-link whitespace-nowrap w-[150px] truncate">
-                            Veetax Bora
-                        </a>
-                        <p class="text-sm text-grey">
-                            Rp 899.000
-                        </p>
-                    </div>
-                    <div class="flex">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                        <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    {{-- footer --}}
+    <footer class="bg-gray-600 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">© {{ date('Y') }} Olshop Buku. All rights reserved.</p>
 
-    <script src="{{ asset('/assets/scripts/sliderConfig.js') }}" type="module"></script>
-    {{-- <script src="{{ asset('/assets/scripts/searchProductListener.js') }}" type="module"></script> --}}
+        </div>
+    </footer>
 </body>
 
 </html>
