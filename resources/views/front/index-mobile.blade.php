@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page | Parma</title>
-    <link rel="shortcut icon" href="{{ asset('/assets/svgs/logo-mark.svg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('/assets/logo/icon-book.webp') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <link rel="stylesheet" href="https://cdn.tailwindcss.com">
@@ -21,10 +21,10 @@
             <div class="">
                 <p class="text-base font-semibold capitalize text-primary">
                     @auth
-                    {{ Auth::user()->name }}
+                        {{ Auth::user()->name }}
                     @endauth
                     @guest
-                    Customer
+                        Customer
                     @endguest
                 </p>
                 <p class="text-sm">
@@ -119,13 +119,13 @@
         </p>
         <div id="categoriesSlider" class="relative">
             @forelse ($categories as $category)
-            <div class="inline-flex gap-2.5 items-center py-3 px-3.5 relative bg-white rounded-xl mr-4">
-                <img src="{{ Storage::url($category->icon) }}" class="size-10" alt="">
-                <a href="{{ route('front.product.category', $category->id) }}"
-                    class="text-base font-semibold truncate stretched-link">
-                    {{ $category->name }}
-                </a>
-            </div>
+                <div class="inline-flex gap-2.5 items-center py-3 px-3.5 relative bg-white rounded-xl mr-4">
+                    <img src="{{ Storage::url($category->icon) }}" class="size-10" alt="">
+                    <a href="{{ route('front.product.category', $category->id) }}"
+                        class="text-base font-semibold truncate stretched-link">
+                        {{ $category->name }}
+                    </a>
+                </div>
             @empty
             @endforelse
         </div>
@@ -139,22 +139,22 @@
         <div id="proudctsSlider" class="relative">
             <!-- Product-->
             @forelse ($products as $product)
-            <div
-                class="rounded-2xl bg-white py-3.5 pl-4 pr-[22px] inline-flex flex-col gap-4 items-start mr-4 relative w-[158px]">
-                <img src="{{ Storage::url($product->photo) }}" class="h-[100px] w-full object-contain"
-                    alt="">
-                <div>
-                    <a href="{{ route('front.product.details', $product->slug) }}"
-                        class="text-base font-semibold w-[120px] truncate stretched-link block">
-                        {{ $product->name }}
-                    </a>
-                    <p class="text-sm truncate text-grey">
-                        Rp {{ number_format($product->price) }}
-                    </p>
+                <div
+                    class="rounded-2xl bg-white py-3.5 pl-4 pr-[22px] inline-flex flex-col gap-4 items-start mr-4 relative w-[158px]">
+                    <img src="{{ Storage::url($product->photo) }}" class="h-[100px] w-full object-contain"
+                        alt="">
+                    <div>
+                        <a href="{{ route('front.product.details', $product->slug) }}"
+                            class="text-base font-semibold w-[120px] truncate stretched-link block">
+                            {{ $product->name }}
+                        </a>
+                        <p class="text-sm truncate text-grey">
+                            Rp {{ number_format($product->price) }}
+                        </p>
+                    </div>
                 </div>
-            </div>
             @empty
-            <p>Ups, Produk belum ada!</p>
+                <p>Ups, Produk belum ada!</p>
             @endforelse
 
 

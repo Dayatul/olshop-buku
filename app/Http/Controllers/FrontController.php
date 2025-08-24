@@ -25,6 +25,20 @@ class FrontController extends Controller
         ]);
     }
 
+    public function product()
+    {
+        $user = Auth::user();
+        $products = Product::with('category')->orderBy('id', 'DESC')->take(6)->get();
+        $categories = Category::all();
+        $articles = Article::with(['user', 'category'])->latest()->take(3)->get();
+        return view('front.product', [
+            'products' => $products,
+            'categories' => $categories,
+            'user' => $user,
+            'articles' => $articles,
+        ]);
+    }
+
     public function details(Product $product)
     {
         $product->load('category');
@@ -54,5 +68,49 @@ class FrontController extends Controller
             'products' => $products,
             'category' => $category
         ]);
+    }
+
+    public function blog()
+    {
+        $articles = Article::with(['user', 'category'])->latest()->paginate(6);
+        return view('front.blog', [
+            'articles' => $articles
+        ]);
+    }
+
+    public function article(Article $article)
+    {
+        $article->load(['user', 'category']);
+        return view('front.article', [
+            'article' => $article
+        ]);
+    }
+
+    public function articleDetails(Article $article)
+    {
+        $article->load(['user', 'category']);
+        return view('front.blog-details', [
+            'article' => $article
+        ]);
+    }
+
+    public function searchArticle(Request $request)
+    {
+        $keyword = $request->input('search');
+        $articles = Article::where('title', 'LIKE', '%' . $keyword . '%')->get();
+
+        return view('front.search-article', [
+            'articles' => $articles,
+            'keyword' => $keyword
+        ]);
+    }
+
+    public function about()
+    {
+        return view('front.about');
+    }
+    public function contact()
+    {
+        return view('front.contact');
     }
 }

@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | Parma</title>
+    <title>Sign Up | Wigati Buku</title>
     <link rel="shortcut icon" href="{{ asset('/assets/svgs/logo-mark.svg') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">
 </head>
 
 <body>
 
-    <div class="flex flex-col items-center px-6 py-10 min-h-dvh">
-        <img src="{{ asset('/assets/svgs/logo.svg') }}" class="mb-[53px]" alt="">
+    <div class="flex flex-col items-center px-6 py-10 h-screen">
+        {{-- <img src="{{ asset('/assets/svgs/logo.svg') }}" class="mb-[53px]" alt=""> --}}
         <form action="{{ route('register') }}" method="POST"
             class="mx-auto max-w-[345px] w-full p-6 bg-white rounded-3xl mt-auto" id="deliveryForm">
             @csrf

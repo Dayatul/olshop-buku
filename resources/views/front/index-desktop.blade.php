@@ -1,7 +1,81 @@
-<x-layout-front title="Home - Wigati Buku">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wigati Buku</title>
+    <link rel="shortcut icon" href="{{ asset('/assets/logo/icon-book.webp') }}" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+
+<body>
+    {{-- navigation --}}
+    <nav>
+        <div class="container mx-auto flex items-center justify-between p-4">
+            <a href="#" class="w-[180px]"><img src="{{ asset('/assets/logo/logo-wigati.webp') }}"
+                    alt=""></a>
+            <div class="flex space-x-6 font-semibold">
+                <a href="#" class="hover:text-red-600">Home</a>
+                <a href="#" class="hover:text-red-600">Product</a>
+                <a href="#" class="hover:text-red-600">Blog</a>
+                <a href="#" class="hover:text-red-600">About Us</a>
+                <a href="#" class="hover:text-red-600">Contact</a>
+            </div>
+
+            {{-- button --}}
+            <div class="relative" x-data="{ open: false }">
+                <!-- Tombol -->
+                @guest
+                    <a href="{{ route('login') }}"
+                        class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded">
+                        <i class="fas fa-sign-in-alt mr-2"></i> Login</a>
+                @endguest
+                @auth
+                    <button @click="open = !open"
+                        class="bg-red-600 text-white px-4 py-2 rounded flex items-center font-semibold"> <i
+                            class="fas fa-user mr-2"></i>
+                        {{ Auth::user()->name }}
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                @endauth
+                <!-- Dropdown -->
+                <div x-show="open" @click.outside="open = false"
+                    class="absolute right-0 mt-2 w-48 bg-white rounded shadow-lg" x-transition>
+                    <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-gray-100 font-semibold">
+                        Dashboard
+                    </a>
+                    @role('buyer')
+                        <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-gray-100 font-semibold">
+                            Cart
+                        </a>
+                        <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-gray-100 font-semibold">
+                            Status Pembelian
+                        </a>
+                        <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:bg-gray-100 font-semibold">
+                            Profile
+                        </a>
+                    @endrole
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100 font-semibold">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     {{-- herosection --}}
-    <section class=" py-20 px-10 space-x-6 container mx-auto flex items-center justify-between ">
-        <div class="container mx-auto w-3/6 ">
+    <section class=" py-20 px-10 space-x-6 container mx-auto flex items-center justify-between">
+        <div class="container mx-auto w-3/6">
             <h4 class="text-4xl font-bold mb-4 text-gray-600">Ribuan judul buku dari berbagai genre</h4>
             <p class="text-lg mb-8 text-gray-600">fiksi, nonfiksi, bisnis, pendidikan, hingga buku anak. Lengkap.
                 Terjangkau. Cepat
@@ -16,7 +90,7 @@
     </section>
 
     {{-- Categories Section --}}
-    <section class="py-10 bg-gray-200 px-10 space-x-6">
+    <section class="py-10 bg-gray-100 px-10 space-x-6">
         <div class="container mx-auto">
             <div id="categoriesSlider" class="relative flex justify-center">
                 @forelse ($categories as $category)
@@ -91,7 +165,7 @@
         </div>
     </section>
     {{-- Cta section --}}
-    <section class="py-20 px-10 bg-white">
+    <section class="py-20 px-10">
         <div class="container mx-auto">
             <p class="text-2xl font-bold text-center text-gray-600 mb-6 px-6">Bayangkan… di ujung jari kamu ada ribuan
                 buku
@@ -124,4 +198,14 @@
             </div>
         </div>
     </section>
-</x-layout-front>
+
+    {{-- footer --}}
+    <footer class="bg-gray-600 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">© {{ date('Y') }} Olshop Buku. All rights reserved.</p>
+
+        </div>
+    </footer>
+</body>
+
+</html>

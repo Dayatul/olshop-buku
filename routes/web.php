@@ -13,6 +13,12 @@ Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/search', [FrontController::class, 'search'])->name('front.search');
 Route::get('/category/{category:id}', [FrontController::class, 'category'])->name('front.product.category');
 Route::get('/details/{product:slug}', [FrontController::class, 'details'])->name('front.product.details');
+Route::get('/product', [FrontController::class, 'product'])->name('front.product');
+Route::get('/blog', [FrontController::class, 'blog'])->name('front.blog');
+Route::get('/blog/{article:slug}', [FrontController::class, 'articleDetails'])->name('front.article.details');
+Route::get('/search/article', [FrontController::class, 'searchArticle'])->name('front.search.article');
+Route::get('/abut', [FrontController::class, 'about'])->name('front.about');
+Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -26,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('carts', CartController::class)->middleware('role:buyer');
     Route::post('/cart/add/{product_id}', [CartController::class, 'store'])->middleware('role:buyer')->name('carts.store');
 
-    Route::resource('product_transactions', ProductTransactionController::class)->middleware('role:owner|buyer');
+    Route::resource('product_transactions', ProductTransactionController::class)->middleware('role:owner|buyer|admin');
 
     // Route::resource('articles', ArticleController::class)->middleware('role:owner|admin|penulis');
 
