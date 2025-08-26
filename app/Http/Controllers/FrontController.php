@@ -92,29 +92,42 @@ class FrontController extends Controller
 
     public function article(Article $article)
     {
-        $article->load(['user', 'category']);
+        $article->load('category');
+        $articles = Article::with(['user', 'category'])->latest()->take(4)->get();
         return view('front.article', [
-            'article' => $article
+            'article' => $article,
+            'articles' => $articles
         ]);
     }
 
-    public function articleDetails(Article $article)
+    public function articleDetails(Article $slug)
     {
-        $article->load(['user', 'category']);
-        return view('front.blog-details', [
-            'article' => $article
+        // Cari artikel berdasarkan slug
+        $article = Article::with('user')->where('slug', $slug)->firstOrFail();
+
+        // Ambil artikel terbaru selain artikel yang sedang dibaca
+        $articles = Article::where('id', '!=', $article->id)
+            ->latest()
+            ->take(8) // ambil 8 artikel terbaru
+            ->get();
+
+        // return view('front.article', compact('article', 'articles'));
+        return view('front.article', [
+            'articles' => $article
         ]);
     }
 
     public function searchArticle(Request $request)
     {
-        $keyword = $request->input('search');
-        $articles = Article::where('title', 'LIKE', '%' . $keyword . '%')->get();
+        $keyword = $request->get('q', '');
 
-        return view('front.search-article', [
-            'articles' => $articles,
-            'keyword' => $keyword
-        ]);
+        $articles = \App\Models\Article::where('title', 'like', "%{$keyword}%")
+            ->orWhere('content', 'like', "%{$keyword}%")
+            ->latest()
+            ->take(20)
+            ->get(['id', 'title', 'slug', 'featured_image', 'content']);
+
+        return response()->json($articles);
     }
 
     public function about()

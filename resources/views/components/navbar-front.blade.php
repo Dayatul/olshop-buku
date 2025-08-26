@@ -17,7 +17,7 @@
             </a>
 
             <a href="{{ route('front.blog') }}"
-                class="relative pb-1 {{ request()->routeIs('front.blog') ? 'text-red-600 after:w-full' : 'text-gray-800 after:w-0' }}
+                class="relative pb-1 {{ request()->routeIs('front.blog') || request()->routeIs('front.article.details') ? 'text-red-600 after:w-full' : 'text-gray-800 after:w-0' }}
               hover:text-red-600 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-red-600 after:transition-all after:duration-300 hover:after:w-full">
                 Blog
             </a>

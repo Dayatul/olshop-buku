@@ -15,11 +15,14 @@ Route::get('/category/{category:id}', [FrontController::class, 'category'])->nam
 Route::get('/details/{product:slug}', [FrontController::class, 'details'])->name('front.product.details');
 Route::get('/product', [FrontController::class, 'product'])->name('front.product');
 Route::get('/blog', [FrontController::class, 'blog'])->name('front.blog');
-Route::get('/blog/{article:slug}', [FrontController::class, 'articleDetails'])->name('front.article.details');
+Route::get('/article/{article:slug}', [FrontController::class, 'article'])->name('front.article.details');
 Route::get('/search/article', [FrontController::class, 'searchArticle'])->name('front.search.article');
 Route::get('/abut', [FrontController::class, 'about'])->name('front.about');
 Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
 Route::get('/search-products', [FrontController::class, 'searchProduct'])->name('front.search.ajax');
+Route::get('/search-articles', [FrontController::class, 'searchArticle'])
+    ->name('front.search.article.ajax');
+
 
 
 Route::get('/dashboard', function () {

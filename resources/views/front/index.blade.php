@@ -133,7 +133,8 @@
                             class="w-full h-48 object-cover mb-4 rounded">
                         <h3 class="text-xl font-semibold mb-2">{{ $article->title }}</h3>
                         <p class="text-gray-600 mb-4"> {{ Str::limit(strip_tags($article->content), 100, '...') }}</p>
-                        <a href="#"" class="text-red-600 hover:underline">Read
+                        <a href="{{ route('front.article.details', $article->slug) }}"
+                            class="text-red-600 hover:underline">Read
                             More</a>
                     </div>
                 @endforeach
