@@ -18,7 +18,7 @@ class CartController extends Controller
         $user = Auth::user();
         $my_charts = $user->carts()->with('product')->get();
 
-        return view('front.carts', ['my_carts' => $my_charts]);
+        return view('front.cart', ['my_carts' => $my_charts]);
     }
 
     /**

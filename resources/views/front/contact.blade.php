@@ -3,39 +3,67 @@
     <section class="py-20 px-10 space-x-6 container mx-auto flex items-center justify-between ">
         <div class="container mx-auto w-3/6 text-center">
             <h4 class="text-4xl font-bold mb-4 text-gray-600">Contact</h4>
-            <p class="text-lg mb-8 text-gray-600">Hubungi Wigati Buku</p>
+            <p class="text-lg mb-8 text-gray-600">Kami siap membantu Anda! Isi formulir atau hubungi kami melalui
+                informasi di bawah ini.</p>
         </div>
     </section>
-    {{-- Contact section --}}
-    <section class="py-20 px-10 bg-gray-50 container mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-10 text-gray-600">Hubungi Kami</h2>
-        <p class="text-lg mb-6 text-gray-600">Jika Anda memiliki pertanyaan atau masalah, jangan ragu untuk menghubungi
-            kami melalui formulir di bawah ini. Kami akan berusaha untuk merespons secepat mungkin.</p>
-        <form action="#" method="POST" class="max-w-2xl mx-auto">
-            @csrf
-            <div class="mb-4">
-                <label for="name" class="block text-gray-700 font-semibold mb-2">Nama</label>
-                <input type="text" id="name" name="name" required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600">
+    <div class="bg-gray-50 text-gray-800">
+
+        {{-- Konten Utama --}}
+        <section class="container mx-auto px-4 py-16 grid md:grid-cols-2 gap-12">
+            {{-- Form Kontak --}}
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold mb-6">Kirim Pesan</h2>
+                <form action="#" method="POST" class="space-y-6">
+                    @csrf
+                    <div>
+                        <label for="name" class="block font-semibold mb-2">Nama</label>
+                        <input type="text" id="name" name="name"
+                            class="block w-full py-3 pl-3 pr-10 border rounded-lg border-gray-300 shadow-sm focus:ring-red-500 focus:border-red-500"
+                            required>
+                    </div>
+                    <div>
+                        <label for="email" class="block font-semibold mb-2">Email</label>
+                        <input type="email" id="email" name="email"
+                            class="block w-full py-3 pl-3 pr-10 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500"
+                            required>
+                    </div>
+                    <div>
+                        <label for="message" class="block font-semibold mb-2">Pesan</label>
+                        <textarea id="message" name="message" rows="5"
+                            class="block w-full py-3 pl-3 pr-10 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500"
+                            required></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg">
+                        <i class="fas fa-paper-plane mr-2"></i>Kirim Pesan
+                    </button>
+                </form>
             </div>
-            <div class="mb-4">
-                <label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
-                <input type="email" id="email" name="email" required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600">
+
+            {{-- Info Kontak --}}
+            <div class="space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Informasi Kontak</h2>
+                    <p class="mb-4 text-gray-600">Silakan hubungi kami melalui alamat atau telepon di bawah ini.</p>
+                    <ul class="space-y-4 text-gray-700">
+                        <li><i class="fas fa-map-marker-alt text-red-600 mr-2"></i> Jl. Contoh No. 123, Jakarta</li>
+                        <li><i class="fas fa-phone-alt text-red-600 mr-2"></i> +62 812-3456-7890</li>
+                        <li><i class="fas fa-envelope text-red-600 mr-2"></i> support@contoh.com</li>
+                    </ul>
+                </div>
+
+                {{-- Google Maps --}}
+                <div class="rounded-lg overflow-hidden shadow-lg">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.860233473139!2d106.82715381522968!3d-6.175387995530814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e8e1b9bcb5%3A0x3f4e33b3d1b4e23d!2sMonas!5e0!3m2!1sid!2sid!4v1695312304918!5m2!1sid!2sid"
+                        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
             </div>
-            <div class="mb-4">
-                <label for="message" class="block text-gray-700 font-semibold mb-2">Pesan</label>
-                <textarea id="message" name="message" rows="5" required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"></textarea>
-            </div>
-            <div class="text-center">
-                <button type="submit"
-                    class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-full transition">
-                    Kirim Pesan
-                </button>
-            </div>
-        </form>
-    </section>
+        </section>
+
+    </div>
     {{-- Section CTA --}}
     <section>
         <div class="py-20 px-10 bg-white container mx-auto">
@@ -45,7 +73,7 @@
             </p>
             <div class="text-center">
                 <a href="{{ route('front.about') }}"
-                    class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-full transition">
+                    class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded transition">
                     About Us
                 </a>
             </div>

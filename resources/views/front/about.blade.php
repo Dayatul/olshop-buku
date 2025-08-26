@@ -7,30 +7,43 @@
         </div>
     </section>
     {{-- Content section --}}
-    <section>
-        <div class="py-20 px-10 bg-gray-50 container mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-10 text-gray-600">Selamat datang di Wigati Buku</h2>
-            <p class="text-lg mb-6 text-gray-600">Wigati Buku adalah toko buku online yang menyediakan berbagai macam
-                buku dari berbagai
-                genre, mulai dari fiksi, nonfiksi, bisnis, pendidikan, hingga buku anak. Kami berkomitmen untuk
-                memberikan
-                pengalaman berbelanja yang mudah, cepat, dan menyenangkan bagi pelanggan kami.</p>
-            <p class="text-lg mb-6 text-gray-600">Selain itu, Wigati Buku juga menyediakan layanan pengiriman buku yang
-                cepat dan
-                terpercaya, sehingga pelanggan dapat menerima buku yang mereka pesan dengan aman dan tepat waktu.</p>
-            <p class="text-lg mb-6 text-gray-600">Selain itu, Wigati Buku juga menyediakan layanan pengiriman buku yang
-                cepat dan
-                terpercaya, sehingga pelanggan dapat menerima buku yang mereka pesan dengan aman dan tepat waktu.</p>
-            <p class="text-lg mb-6 text-gray-600">Selain itu, Wigati Buku juga menyediakan layanan pengiriman buku yang
-                cepat dan
-                terpercaya, sehingga pelanggan dapat menerima buku yang mereka pesan dengan aman dan tepat waktu.</p>
-            <p class="text-lg mb-6 text-gray-600">Selain itu, Wigati Buku juga menyediakan layanan pengiriman buku yang
-                cepat dan
-                terpercaya, sehingga pelanggan dapat menerima buku yang mereka pesan dengan aman dan tepat waktu.</p>
-            <p class="text-lg mb-6 text-gray-600">Selain itu, Wigati Buku juga menyediakan layanan pengiriman buku yang
-                cepat dan
-                terpercaya, sehingga pelanggan dapat menerima buku yang mereka pesan dengan aman dan tepat waktu.</p>
+    {{-- Tentang Kami --}}
+    <section class=" mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center bg-gray-100 w-full">
+        <div>
+            <img src="{{ asset('assets/logo/logo-wigati.webp') }}" alt="Tentang Kami" class="w-[400px] mx-auto">
+        </div>
+        <div>
+            <h2 class="text-3xl font-bold mb-4">Siapa Kami?</h2>
+            <p class="text-gray-600 mb-6">
+                Kami adalah perusahaan yang berdedikasi untuk memberikan produk dan layanan terbaik
+                kepada pelanggan. Dengan pengalaman bertahun-tahun, kami berkomitmen untuk
+                memberikan inovasi, kualitas, dan kepuasan pelanggan.
+            </p>
+            <a href="{{ route('front.contact') }}"
+                class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 mt-4 rounded font-semibold">Hubungi Kami</a>
+        </div>
+    </section>
 
+    {{-- Visi dan Misi --}}
+    <section class="bg-gray-50 py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-10">Visi & Misi</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow hover:shadow-xl transition">
+                    <h3 class="text-2xl font-semibold mb-4">Visi</h3>
+                    <p class="text-gray-600">
+                        Menjadi perusahaan terdepan dalam memberikan solusi inovatif yang bermanfaat
+                        bagi masyarakat luas.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow hover:shadow-xl transition">
+                    <h3 class="text-2xl font-semibold mb-4">Misi</h3>
+                    <p class="text-gray-600">
+                        Memberikan produk berkualitas tinggi dengan pelayanan terbaik,
+                        serta menciptakan nilai tambah bagi pelanggan dan mitra.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -38,13 +51,13 @@
     {{-- Section CTA --}}
     <section>
         <div class="py-20 px-10 bg-white container mx-auto">
-            <p class="text-2xl font-bold text-center text-gray-600 mb-6 px-6">Ingin tahu lebih banyak tentang Wigati
-                Buku?
+            <p class="text-2xl font-bold text-center text-gray-600 mb-6 px-6">Dapatkan informasi lebih lanjut atau ingin
+                menghubungi kami?
             </p>
             <div class="text-center">
-                <a href="{{ route('front.about') }}"
-                    class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-full transition">
-                    About Us
+                <a href="{{ route('front.contact') }}"
+                    class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded transition">
+                    Hubungi Kami
                 </a>
             </div>
         </div>

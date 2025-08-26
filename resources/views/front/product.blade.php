@@ -17,17 +17,28 @@
                         placeholder="Cari buku faforitmu...">
                 </form>
             </div>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
                 @forelse ($products as $product)
-                    <a href="{{ route('front.product.details', $product->slug) }}" class="hover:scale-105 transition">
-                        <div class=" bg-white p-6 rounded-lg shadow-lg text-center">
+                    <div class=" bg-white p-6 rounded-lg shadow-lg text-center hover:scale-105 transition">
+                        <a href="{{ route('front.product.details', $product->slug) }}"
+                            class="hover:scale-105 transition">
                             <img src=" {{ Storage::url($product->photo) }} " alt="{{ $product->name }}"
                                 class="w-full h-48 object-cover mb-4 rounded">
                             <h3 class="text-xl font-semibold mb-2">{{ $product->name }}</h3>
-                            <span class="text-red-600 font-bold mb-2"> Rp {{ number_format($product->price) }}
+                            <span class="text-red-600 font-bold mb-4"> Rp {{ number_format($product->price) }}
                             </span>
-                        </div>
-                    </a>
+                        </a>
+                        <form action="{{ route('carts.store', $product->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" name="product_id" value="{{ $product->id }}"
+                                class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded transition mt-4"><i
+                                    class="fas fa-shopping-cart mr-2"
+                                    onclick="{{ route('carts.store', $product->id) }}"></i>Add
+                                To Cart</button>
+                        </form>
+                    </div>
+
                 @empty
                     <div class="bg-white p-6 rounded-lg shadow-lg">
                         <p>Ups, Tidak ada produk</p>
@@ -51,4 +62,22 @@
             </div>
         </div>
     </section>
+    <script>
+        function productSearch() {
+            return {
+                keyword: '',
+                products: [],
+                fetchProducts() {
+                    fetch('{{ route('front.search.ajax') }}')
+                        .then(res => res.json())
+                        .then(data => this.products = data);
+                },
+                searchProducts() {
+                    fetch(`{{ route('front.search.ajax') }}?search=${this.keyword}`)
+                        .then(res => res.json())
+                        .then(data => this.products = data);
+                }
+            }
+        }
+    </script>
 </x-layout-front>

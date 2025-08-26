@@ -19,6 +19,8 @@ Route::get('/blog/{article:slug}', [FrontController::class, 'articleDetails'])->
 Route::get('/search/article', [FrontController::class, 'searchArticle'])->name('front.search.article');
 Route::get('/abut', [FrontController::class, 'about'])->name('front.about');
 Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
+Route::get('/search-products', [FrontController::class, 'searchProduct'])->name('front.search.ajax');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Route::resource('carts', CartController::class)->middleware('role:buyer');
+    // Route::post('/cart/add/{product_id}', [CartController::class, 'store'])->middleware('role:buyer')->name('carts.store');
     Route::resource('carts', CartController::class)->middleware('role:buyer');
     Route::post('/cart/add/{product_id}', [CartController::class, 'store'])->middleware('role:buyer')->name('carts.store');
 

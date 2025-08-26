@@ -14,9 +14,9 @@ class FrontController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $products = Product::with('category')->orderBy('id', 'DESC')->take(6)->get();
+        $products = Product::with('category')->orderBy('id', 'DESC')->take(8)->get();
         $categories = Category::all();
-        $articles = Article::with(['user', 'category'])->latest()->take(3)->get();
+        $articles = Article::with(['user', 'category'])->latest()->take(4)->get();
         return view('front.index', [
             'products' => $products,
             'categories' => $categories,
@@ -28,9 +28,9 @@ class FrontController extends Controller
     public function product()
     {
         $user = Auth::user();
-        $products = Product::with('category')->orderBy('id', 'DESC')->take(6)->get();
+        $products = Product::with('category')->orderBy('id', 'DESC')->get();
         $categories = Category::all();
-        $articles = Article::with(['user', 'category'])->latest()->take(3)->get();
+        $articles = Article::with(['user', 'category'])->latest()->get();
         return view('front.product', [
             'products' => $products,
             'categories' => $categories,
@@ -38,6 +38,18 @@ class FrontController extends Controller
             'articles' => $articles,
         ]);
     }
+
+    public function searchProduct(Request $request)
+    {
+        $query = $request->get('search', '');
+        $products = Product::where('name', 'like', "%{$query}%")
+            ->orWhere('description', 'like', "%{$query}%")
+            ->take(20)
+            ->get();
+
+        return response()->json($products);
+    }
+
 
     public function details(Product $product)
     {

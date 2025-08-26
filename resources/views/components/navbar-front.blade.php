@@ -58,7 +58,7 @@
                         class="block px-4 py-2 hover:bg-gray-100 font-semibold">Dashboard</a>
 
                     @role('buyer')
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 font-semibold">Cart</a>
+                        <a href="{{ route('carts.index') }}" class="block px-4 py-2 hover:bg-gray-100 font-semibold">Cart</a>
                         <a href="#" class="block px-4 py-2 hover:bg-gray-100 font-semibold">Status Pembelian</a>
                     @endrole
 

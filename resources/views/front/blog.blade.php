@@ -17,7 +17,23 @@
                         placeholder="Cari artikel...">
                 </form>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                @forelse ($articles as $article)
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:scale-105 transition">
+                        <img src=" {{ Storage::url($article->featured_image) }}  " alt="{{ $article->title }}"
+                            class="w-full h-48 object-cover mb-4 rounded">
+                        <h3 class="text-xl font-semibold mb-2">{{ $article->title }}</h3>
+                        <p class="text-gray-600 mb-4"> {{ Str::limit(strip_tags($article->content), 100, '...') }}</p>
+                        <a href="#"" class="text-red-600 hover:underline">Read
+                            More</a>
+                    </div>
+                @empty
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <p>Ups, Tidak ada artikel</p>
+                    </div>
+                @endforelse
+            </div>
+            {{-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
                 @forelse ($articles as $article)
                     <a href="{{ route('front.article.details', $article->slug) }}" class="hover:scale-105 transition">
                         <div class=" bg-white p-6 rounded-lg shadow-lg text-center">
@@ -33,7 +49,7 @@
                         <p>Ups, Tidak ada artikel</p>
                     </div>
                 @endforelse
-            </div>
+            </div> --}}
         </div>
     </section>
     {{-- Section CTA --}}
