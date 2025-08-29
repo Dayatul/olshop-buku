@@ -24,7 +24,7 @@ class ProductTransactionController extends Controller
         } else {
             $product_transactions = ProductTransaction::orderBy('created_at', 'desc')->get();
         }
-        return view('admin.product_transaction.index', ['product_transactions' => $product_transactions]);
+        return view('front.product_transaction.index', ['product_transactions' => $product_transactions]);
     }
 
     /**
@@ -42,7 +42,7 @@ class ProductTransactionController extends Controller
     {
         //
 
-        return view('admin.product_transaction.details');
+        return view('front.product_transaction.details');
     }
 
     /**
@@ -123,7 +123,7 @@ class ProductTransactionController extends Controller
     public function show(ProductTransaction $productTransaction)
     {
         $productTransaction = ProductTransaction::with('transactionDetails.product')->find($productTransaction->id);
-        return view('admin.product_transaction.details', ['product_transaction' => $productTransaction]);
+        return view('front.product_transaction.details', ['product_transaction' => $productTransaction]);
     }
 
     /**

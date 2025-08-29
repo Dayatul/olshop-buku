@@ -11,7 +11,7 @@
             </a>
 
             <a href="{{ route('front.product') }}"
-                class="relative pb-1 {{ request()->routeIs('front.product') ? 'text-red-600 after:w-full' : 'text-gray-800 after:w-0' }}
+                class="relative pb-1 {{ request()->routeIs('front.product') || request()->routeIs('front.product.details') || request()->routeIs('front.product.category') || request()->routeIs('front.search') ? 'text-red-600 after:w-full' : 'text-gray-800 after:w-0' }}
               hover:text-red-600 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-red-600 after:transition-all after:duration-300 hover:after:w-full">
                 Product
             </a>
@@ -54,12 +54,13 @@
 
                 <div x-show="open" @click.outside="open = false" x-transition
                     class="absolute right-0 mt-2 w-48 bg-white rounded shadow-lg z-50">
-                    <a href="{{ route('dashboard') }}"
-                        class="block px-4 py-2 hover:bg-gray-100 font-semibold">Dashboard</a>
+                    {{-- <a href="{{ route('dashboard') }}"
+                        class="block px-4 py-2 hover:bg-gray-100 font-semibold">Dashboard</a> --}}
 
                     @role('buyer')
                         <a href="{{ route('carts.index') }}" class="block px-4 py-2 hover:bg-gray-100 font-semibold">Cart</a>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 font-semibold">Status Pembelian</a>
+                        <a href="{{ route('product_transactions.index') }}"
+                            class="block px-4 py-2 hover:bg-gray-100 font-semibold">Status Pembelian</a>
                     @endrole
 
                     <form method="POST" action="{{ route('logout') }}">

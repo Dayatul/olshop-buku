@@ -12,7 +12,8 @@ use App\Http\Controllers\ProductTransactionController;
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/search', [FrontController::class, 'search'])->name('front.search');
 Route::get('/category/{category:id}', [FrontController::class, 'category'])->name('front.product.category');
-Route::get('/details/{product:slug}', [FrontController::class, 'details'])->name('front.product.details');
+// Route::get('/details/{product:slug}', [FrontController::class, 'details'])->name('front.product.details');
+Route::get('/product/{product:slug}', [FrontController::class, 'productDetails'])->name('front.product.details');
 Route::get('/product', [FrontController::class, 'product'])->name('front.product');
 Route::get('/blog', [FrontController::class, 'blog'])->name('front.blog');
 Route::get('/article/{article:slug}', [FrontController::class, 'article'])->name('front.article.details');
@@ -36,7 +37,7 @@ Route::middleware('auth')->group(function () {
 
     // Route::resource('carts', CartController::class)->middleware('role:buyer');
     // Route::post('/cart/add/{product_id}', [CartController::class, 'store'])->middleware('role:buyer')->name('carts.store');
-    Route::resource('carts', CartController::class)->middleware('role:buyer');
+    Route::resource('carts', CartController::class)->middleware('role:buyer|penulis');
     Route::post('/cart/add/{product_id}', [CartController::class, 'store'])->middleware('role:buyer')->name('carts.store');
 
     Route::resource('product_transactions', ProductTransactionController::class)->middleware('role:owner|buyer|admin');

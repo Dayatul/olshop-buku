@@ -8,7 +8,6 @@
         </div>
     </section>
     <div class="bg-gray-50 text-gray-800">
-
         {{-- Konten Utama --}}
         <section class="container mx-auto px-4 py-16 grid md:grid-cols-2 gap-12">
             {{-- Form Kontak --}}

@@ -1,70 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category Product</title>
-    <link rel="shortcut icon" href="{{ asset('/assets/svgs/logo-mark.svg') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ asset('/assets/css/main.css') }}">
-    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body>
-    <!-- Topbar -->
-    <section class="relative flex items-center justify-between gap-5 wrapper">
-        <a href="{{ route('front.index') }}" class="p-2 bg-white rounded-full">
-            <img src="{{ asset('/assets/svgs/ic-arrow-left.svg') }}" class="size-5" alt="">
-        </a>
-        <p class="absolute text-base font-semibold translate-x-1/2 -translate-y-1/2 top-1/2 right-1/2">
-            {{ $category->name }} Products
-        </p>
-        <button type="button" class="p-2 bg-white rounded-full">
-            <img src="{{ asset('/assets/svgs/ic-triple-dots.svg') }}" class="size-5" alt="">
-        </button>
+<x-layout-front title="Product - Wigati Buku">
+    {{-- Section Header --}}
+    <section class="py-20 px-10 space-x-6 container mx-auto flex items-center justify-between ">
+        <div class="container mx-auto w-3/6 text-center">
+            <h4 class="text-4xl font-bold mb-4 text-gray-600">Kategori {{ $category->name }}</h4>
+        </div>
     </section>
+    {{-- product section --}}
+    <section class="py-20 bg-gray-100 px-10" id="products">
+        <div class="container mx-auto flex flex-col gap-10">
+            <div class="w-1/2 mx-auto">
+                <form action="{{ route('front.search') }}" method="GET" id="searchForm" class="w-full">
+                    <input type="text" name="search" id="searchProduct"
+                        style="background-image: url('{{ asset('/assets/svgs/ic-search.svg') }}')"
+                        class="block w-full py-3.5 pl-4 pr-10 rounded-[50px] font-semibold placeholder:text-grey placeholder:font-normal text-black text-base bg-no-repeat bg-[calc(100%-16px)]  focus:ring-2 focus:ring-primary focus:outline-none focus:border-none transition-all hover:ring-2 hover:ring-red-600"
+                        placeholder="Cari buku faforitmu...">
+                </form>
+            </div>
 
-
-    <!-- Search Results -->
-    <section class="wrapper flex flex-col gap-2.5">
-        <p class="text-base font-bold">
-            Results
-        </p>
-        <div class="flex flex-col gap-4">
-            <!-- List Product -->
-            @forelse ($products as $product)
-                <div class="py-3.5 pl-4 pr-[22px] bg-white rounded-2xl flex gap-1 items-center relative">
-                    <img src="{{ Storage::url($product->photo) }}"
-                        class="w-full max-w-[70px] max-h-[70px] object-contain" alt="">
-                    <div class="flex flex-wrap items-center justify-between w-full gap-1">
-                        <div class="flex flex-col gap-1">
-                            <a href="{{ route('front.product.details', $product->slug) }}"
-                                class="text-base font-semibold stretched-link whitespace-nowrap w-[150px] truncate">
-                                {{ $product->name }}
-                            </a>
-                            <p class="text-sm text-grey">
-                                Rp. {{ number_format($product->price) }}
-                            </p>
-                        </div>
-                        <div class="flex">
-                            <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                            <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                            <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                            <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                            <img src="{{ asset('/assets/svgs/star.svg') }}" class="size-[18px]" alt="">
-                        </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
+                @forelse ($products as $product)
+                    <div class=" bg-white p-6 rounded-lg shadow-lg text-center hover:scale-105 transition">
+                        <a href="{{ route('front.product.details', $product->slug) }}"
+                            class="hover:scale-105 transition">
+                            <img src=" {{ Storage::url($product->photo) }} " alt="{{ $product->name }}"
+                                class="w-full h-48 object-cover mb-4 rounded">
+                            <h3 class="text-xl font-semibold mb-2">{{ $product->name }}</h3>
+                            <span class="text-red-600 font-bold mb-4"> Rp {{ number_format($product->price) }}
+                            </span>
+                        </a>
+                        <form action="{{ route('carts.store', $product->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" name="product_id" value="{{ $product->id }}"
+                                class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded transition mt-4"><i
+                                    class="fas fa-shopping-cart mr-2"
+                                    onclick="{{ route('carts.store', $product->id) }}"></i>Add
+                                To Cart</button>
+                        </form>
                     </div>
-                </div>
-            @empty
-                <p>Ups!, Produk yang anda cari tidak ditemukan...</p>
-            @endforelse
+
+                @empty
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <p>Ups, Tidak ada produk</p>
+                    </div>
+                @endforelse
+            </div>
+        </div>
         </div>
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="/public/scripts/searchProductListener.js" type="module"></script>
-</body>
-
-</html>
+</x-layout-front>

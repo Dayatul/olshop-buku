@@ -50,6 +50,24 @@ class FrontController extends Controller
         return response()->json($products);
     }
 
+    public function productDetails(Product $product)
+    {
+        // Produk yang sedang dilihat sudah tersedia di $product (Route Model Binding)
+        $product->load('category'); // load relasi user
+
+        // Ambil produk terbaru selain produk yang sedang dibaca
+        $products = Product::where('id', '!=', $product->id)
+            ->latest()
+            ->take(4)
+            ->get();
+
+        return view('front.detail-product', [
+            'product' => $product,
+            'products' => $products
+        ]);
+    }
+
+
 
     public function details(Product $product)
     {
@@ -116,6 +134,8 @@ class FrontController extends Controller
             'articles' => $article
         ]);
     }
+
+
 
     public function searchArticle(Request $request)
     {
