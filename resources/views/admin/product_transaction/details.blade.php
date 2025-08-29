@@ -122,7 +122,7 @@
                     </div>
                 </div>
                 <hr class="my-3">
-                @role('owner')
+                @role('owner|admin')
                     @if ($product_transaction->is_paid)
                         <a href="#"
                             class="w-fit font-bold bg-green-500 text-white py-3 px-5 rounded-full hover:bg-green-900">

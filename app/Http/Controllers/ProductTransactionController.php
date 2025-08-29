@@ -21,10 +21,11 @@ class ProductTransactionController extends Controller
         $user = Auth::user();
         if ($user->hasRole('buyer')) {
             $product_transactions = $user->productTransactions()->orderBy('created_at', 'desc')->get();
-        } else {
+            return view('front.product_transaction.index', ['product_transactions' => $product_transactions]);
+        } elseif ($user->hasRole('admin|owner')) {
             $product_transactions = ProductTransaction::orderBy('created_at', 'desc')->get();
+            return view('admin.product_transaction.index', ['product_transactions' => $product_transactions]);
         }
-        return view('front.product_transaction.index', ['product_transactions' => $product_transactions]);
     }
 
     /**
@@ -41,8 +42,11 @@ class ProductTransactionController extends Controller
     public function detail()
     {
         //
-
-        return view('front.product_transaction.details');
+        if (auth()->user()->hasRole('admin|owner')) {
+            return redirect()->route('admin.product_transaction.details');
+        } elseif (auth()->user()->hasRole('buyer')) {
+            return view('front.product_transaction.details');
+        }
     }
 
     /**
@@ -123,7 +127,11 @@ class ProductTransactionController extends Controller
     public function show(ProductTransaction $productTransaction)
     {
         $productTransaction = ProductTransaction::with('transactionDetails.product')->find($productTransaction->id);
-        return view('front.product_transaction.details', ['product_transaction' => $productTransaction]);
+        if (auth()->user()->hasRole('admin|owner')) {
+            return view('admin.product_transaction.details', ['product_transaction' => $productTransaction]);
+        } elseif (auth()->user()->hasRole('buyer')) {
+            return view('front.product_transaction.details', ['product_transaction' => $productTransaction]);
+        }
     }
 
     /**
@@ -145,6 +153,7 @@ class ProductTransactionController extends Controller
         $product_transaction->update([
             'is_paid' => true,
         ]);
+
         return redirect()->back()->with('success', 'Product Transaction Updated!');
     }
 

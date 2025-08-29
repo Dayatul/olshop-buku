@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-row w-full justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ Auth::user()->hasRole('owner') ? __('Apotek Orders') : __('My Orders') }}
+                {{ Auth::user()->hasRole('owner') ? __('Orders') : __('Orders') }}
             </h2>
 
         </div>

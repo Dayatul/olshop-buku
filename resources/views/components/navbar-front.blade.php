@@ -54,8 +54,10 @@
 
                 <div x-show="open" @click.outside="open = false" x-transition
                     class="absolute right-0 mt-2 w-48 bg-white rounded shadow-lg z-50">
-                    {{-- <a href="{{ route('dashboard') }}"
-                        class="block px-4 py-2 hover:bg-gray-100 font-semibold">Dashboard</a> --}}
+                    @role('admin|penulis|owner')
+                        <a href="{{ route('dashboard') }}"
+                            class="block px-4 py-2 hover:bg-gray-100 font-semibold">Dashboard</a>
+                    @endrole
 
                     @role('buyer')
                         <a href="{{ route('carts.index') }}" class="block px-4 py-2 hover:bg-gray-100 font-semibold">Cart</a>
