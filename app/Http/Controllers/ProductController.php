@@ -94,11 +94,11 @@ class ProductController extends Controller
     {
         //
         $validated = $request->validate([
-            'name' => 'sometimes|string|max:255',
-            'about' => 'sometimes|string',
-            'category_id' => 'sometimes|integer',
-            'price' => 'sometimes|integer',
-            'photo' => 'sometimes|image|mimes:jpeg,png,jpg,svg',
+            'name' => 'required|string|max:255',
+            'about' => 'required|string',
+            'category_id' => 'required|integer',
+            'price' => 'required|integer',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,svg',
         ]);
 
         DB::beginTransaction();
