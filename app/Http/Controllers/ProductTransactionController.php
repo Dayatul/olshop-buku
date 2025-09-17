@@ -127,7 +127,11 @@ class ProductTransactionController extends Controller
     public function show(ProductTransaction $productTransaction)
     {
         $productTransaction = ProductTransaction::with('transactionDetails.product')->find($productTransaction->id);
-        return view('front.product_transaction.details', ['product_transaction' => $productTransaction]);
+        if (auth()->user()->hasRole('admin|owner')) {
+            return view('admin.product_transaction.details', ['product_transaction' => $productTransaction]);
+        } elseif (auth()->user()->hasRole('buyer')) {
+            return view('front.product_transaction.details', ['product_transaction' => $productTransaction]);
+        }
     }
 
     /**
