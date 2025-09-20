@@ -2,7 +2,7 @@
     {{-- herosection --}}
     <section class=" py-20 px-10 space-x-6 container mx-auto flex items-center justify-between ">
         <div class="container mx-auto w-3/6 ">
-            <h4 class="text-4xl font-bold mb-4 text-gray-600">Ribuan judul buku dari berbagai genre</h4>
+            <h4 class="text-4xl font-bold mb-4 text-gray-600">berbagai judul buku dari berbagai genre</h4>
             <p class="text-lg mb-8 text-gray-600">fiksi, nonfiksi, bisnis, pendidikan, hingga buku anak. Lengkap.
                 Terjangkau. Cepat
                 sampai</p>
